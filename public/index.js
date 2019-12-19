@@ -11,6 +11,8 @@ const partialsPath = path.join(__dirname, "../templates/partials")
 app.set("view engine", "hbs")//Telling express/NODE to use handlebars for templates
 app.set("views", viewsPath)//telling express to get templates from templates/views folder
 hbs.registerPartials(partialsPath)
+//set up out static asset directory 
+app.use(express.static(publicDirectoryPath))
 app.get("", async (req, res) => {
     try {
         res.render("index", {
@@ -34,6 +36,7 @@ app.get("/about/:id", async (req, res) => {
         })
     } catch {
         res.status(500).send()
+
     }
 })
 
